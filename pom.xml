@@ -1,52 +1,54 @@
-```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yourcompany</groupId>
-    <artifactId>my-app</artifactId>
+    <!-- Project Coordinates -->
+    <groupId>com.example</groupId>
+    <artifactId>my-webapp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>My Web Application</name>
-    <description>A sample web application for Jenkins CI/CD pipeline</description>
+    <description>Sample web application for Jenkins CI/CD pipeline</description>
 
+    <!-- Properties -->
     <properties>
-        <java.version>11</java.version> <!-- Adjust to your Java version -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.projectKey>my-project</sonar.projectKey> <!-- Matches SONAR_PROJECT parameter -->
-        <sonar.host.url>http://sonarqube.yourcompany.com</sonar.host.url>
-        <sonar.login>${env.SONAR_TOKEN}</sonar.login> <!-- Uses Jenkins credential -->
     </properties>
 
+    <!-- Dependencies -->
     <dependencies>
-        <!-- Servlet API for web application -->
+        <!-- Servlet API (provided by container like Tomcat) -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Add other dependencies as needed -->
     </dependencies>
 
+    <!-- Build Plugins -->
     <build>
-        <finalName>my-app</finalName> <!-- Matches WAR file name in Jenkinsfile -->
+        <finalName>my-webapp</finalName>
         <plugins>
-            <!-- Maven Compiler Plugin -->
+            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
-            <!-- Maven WAR Plugin -->
+
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -55,45 +57,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <!-- SonarQube Plugin -->
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.1.2184</version>
-            </plugin>
-            <!-- Maven Deploy Plugin for Nexus -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0-M1</version>
-            </plugin>
         </plugins>
     </build>
 
-    <!-- Nexus Repository Configuration -->
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>Nexus Repository</name>
-            <url>http://nexus.yourcompany.com:8081/repository/${env.NEXUS_REPO}/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://nexus.yourcompany.com:8081/repository/${env.NEXUS_REPO}/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <!-- Optional: Add repositories for dependencies -->
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-        <repository>
-            <id>nexus</id>
-            <url>http://nexus.yourcompany.com:8081/repository/maven-public/</url>
-        </repository>
-    </repositories>
 </project>
-```
