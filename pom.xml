@@ -59,15 +59,13 @@
 
     <!-- Build Configuration -->
     <build>
-        <!-- Ensure war name matches Jenkins expectations -->
-        <finalName>${project.artifactId}-${project.version}</finalName>
-
+        <finalName>my-webapp</finalName>
         <plugins>
             <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -78,7 +76,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>3.3.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -88,7 +86,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.0.0-M1</version>
             </plugin>
         </plugins>
     </build>
@@ -113,4 +111,5 @@
             <name>Nexus Snapshot Repository</name>
             <url>http://nexus.yourcompany.com:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
-    </
+    </distributionManagement>
+</project>
